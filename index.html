@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Everywhere Gym</title>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link href='//fonts.googleapis.com/css?family=Cabin' rel='stylesheet' type="text/css">
+</head>
+<body>
+	<img src="img\logo.png">
+	<table>
+	<tr>
+		<td width="70%">
+			<div align="left">The closest gym to you is located at: 
+				<div class="loc" style="list-style-type:none">
+					<script id="loc-template" type="text/x-handlebars-template">
+						<span>{{addr}}</span>
+						<span id="Gym" style="visibility: hidden">{{city}}</span>
+					</script>
+				</div>
+			</div>
+   			<div id="map" style="height: 350px; width:90%;"><p>Loading map...</p></div>
+   		</td>
+   		
+		<td width="30%">
+			<form>
+			<label for="name">Name:</label><input id="Name" type="text" placeholder="Your full name">
+			<label for="email">Email:</label><input id="Email" type="email" placeholder="Your email">
+			<label for="date">Date:</label><input id="Date" type="date">
+			<label for="time">Time:</label><select id="Time" type="text">
+	    		<option value="9-11am">9-11am</option>
+	    		<option value="11am-1pm">11am-1pm</option>
+	    		<option value="1pm-3pm">1-3pm</option>
+	    		<option value="3pm-5pm">3-5pm</option>
+	  		</select>
+			<button type="submit">Reserve slot</button>
+			</form>
+		</td>
+	</tr>
+	</table>
+
+	<!-- Firebase CDN -->
+    <script src="https://www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>
+	<script src="js/jquery-3.2.0.min.js"></script>
+	<script src="js/handlebars-v4.0.5.js"></script>
+	<script src="js/main.js"></script>
+	<!--Google Map-->
+	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDudIObdCx_1OvlWrlck1Hi7XHGZltU7xY&callback=initMap"></script>
+</body>
+</html>
