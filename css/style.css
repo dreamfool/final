@@ -52,3 +52,7 @@ label {
 img {
   float: center;
 }
+
+#Gym {
+  visibility: hidden;
+}

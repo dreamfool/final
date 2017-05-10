@@ -85,7 +85,6 @@ function getLocations() {
       locRef.once("value").then(function(snapshot) {
       // returns all gym locations
       var allLocations = snapshot.val();
-      //console.log(allLocations);
       // loop through all gym locations
       for (var loc in allLocations) {
         var gym = {
@@ -150,7 +149,6 @@ function getLocations() {
       var marker = new google.maps.Marker({
         position: closestLoc,
         map: map,
-        //label: closestAdd,
         icon: image,
         animation: google.maps.Animation.DROP
       });
@@ -177,8 +175,8 @@ function getLocations() {
 }
 
 function makeReservations (userInput) {
-  // Write to reservation to database - "push" for add
-  locRef = firebase.database().ref("gymlocs/" + $('.loc span:last-child').text() + "/reservations");
+  // Write to reservation to database under the selected gym - "push" for add
+  locRef = firebase.database().ref("gymlocs/" + $('#Gym').text() + "/reservations");
   locRef.push({
         name: userInput.uName,
         email: userInput.uEmail,
@@ -196,50 +194,23 @@ $("button").on('click', function(e){
     uEmail:$('#Email').val(),
     uDate:$('#Date').val(),
     uTime:$('#Time').val(),
-    uGym:$('.loc span:last-child').text() //gym ID
+    uGym:$('#Gym').text() //gym ID
   };
-  if (userInput.length == 5) {
+  // if all fields have been populated
+  if(userInput.uName && userInput.uEmail && userInput.uDate && userInput.uTime && userInput.uGym) {
     // send them to database
     makeReservations(userInput);
     // notify the user reservation has been made
-    alert("Your reservation for \n" + 
-      "Name: " + userInput.uName + "\n" + 
-      "Email: " + userInput.uEmail + "\n" + 
-      "Date: " + userInput.uDate + "\n" + 
-      "Time: " + userInput.uTime + "\n" +
-      "Gym: " + $('.loc span:first-child').text() + "\n" +
-      "has been submitted successfully");    
+    alert(`Your reservation for
+      Name: ${userInput.uName}
+      Email: ${userInput.uEmail}
+      Date: ${userInput.uDate}
+      Time: ${userInput.uTime}
+      Gym: ${userInput.uGym}
+      has been submitted successfully`);          
   } else {
     alert("You have not filled out all the fields, please try again");
   }
 });
-
-/*function initMap() {
-   // navigator is JS built-in
-   navigator.geolocation.getCurrentPosition(function(position) 
-   {
-      // Obtain and set userLocation
-      userLocation = {
-        lat: position.coords.latitude,
-        lng: position.coords.longitude
-      };
-
-      // something else here after user location is obtained
-      //console.log(userLocation.lat, userLocation.lng);
-      
-      var map = new google.maps.Map(document.getElementById('map'), 
-      {
-        center: userLocation,
-        zoom: 10,
-        scrollwheel: false
-      });
-     
-      var marker = new google.maps.Marker({
-        position: userLocation,
-        map: map,
-        title: 'Your Location'
-      });
-   });
-}*/
 
 getLocations();
