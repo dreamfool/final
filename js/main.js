@@ -100,7 +100,7 @@ function getLocations() {
         distArr.push([dist, gym.city, gym.lat, gym.lng, gym.addr]);
       }
       // After the loop is done, find the shortest distance in array
-      distArr.sort(function(a, b){return b-a});
+      distArr.sort(function(a, b){return b[0]-a[0]});
       distArr.reverse(); //shortest length is now at index 0
       var closestDist = distArr[0][0].toFixed(1); 
       var closestLat = distArr[0][2];
